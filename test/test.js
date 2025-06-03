@@ -1,4 +1,6 @@
 import { newFakeGasenum } from '../main.js'
+/// testing from npm
+/// import { newFakeGasenum } from '@mcpher/fake-gasenum'
 import { Exports as unitExports } from '@mcpher/unit'
 import is from '@sindresorhus/is';
 
