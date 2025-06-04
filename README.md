@@ -122,15 +122,23 @@ t.is(Fruit.name(), Fruits.ORANGE.name())
 
 ## Proxy guarding
 
-All key accesses are checked for validity via a proxy and will throw an error if you try to access a key that doesn't exist.
+To exactly imitate Apps Script, the default behavior when you access an undefined property (CoorType.foo for example) is to return undefined. I prefer to throw an error in these circumstances, so there is a 'safe' variant available. 
+````js
+import { newFakeGasenumSafe } from '../main.js'
+const p = newFakeGasenumSafe (["APPLE", "BANANA", "ORANGE"])
+````
+
+All key accesses are checked for validity via a proxy and will throw an error if you try to access a key that doesn't exist. 
 ````js
  t.is( t.threw (()=>p.foo).message, "attempt to get non-existent property foo in fake-gas-enum", "check proxies are guarding")
 ````
 
-You can of course use Reflect to see if an Enum has a particular key defined.
+You can of course still use Reflect to see if an Enum has a particular key defined.
 ````js
-Reflect.has (ColorType, "foo") // false
+Reflect.has (p, "foo") // false
 ````
+
+I recommend using this safe variant. A circumstance where you might prefer to go with the looser unsafe version is if your code (or modules you import) probe for values rather than check for presence of keys.
 
 
 ## Conclusion

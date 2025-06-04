@@ -1,4 +1,6 @@
-//import { newFakeGasenum } from '../main.js'
+//import { newFakeGasenum , newFakeGasenumSafe} from '../main.js'
+/// testing from npm
+/// import { newFakeGasenum } from '@mcpher/fake-gasenum'
 //import { Exports as unitExports } from '@mcpher/unit'
 //import is from '@sindresorhus/is';
 
@@ -55,8 +57,6 @@ const testFakeGasEnum = () => {
     t.is(p.name(), p[fruit[1]][fruit[2]][fruit[0]].name(), "check circularity")
 
 
-    t.is(t.threw(() => p.foo).message, "attempt to get non-existent property foo in fake-gas-enum", "check proxies are guarding")
-
     /// apps script fake example
     const keys = ["UNSUPPORTED", "RGB", "THEME"]
 
@@ -84,7 +84,15 @@ const testFakeGasEnum = () => {
     t.is(ColorType.RGB.compareTo(ColorType.THEME), -1)
 
     t.is(ColorType.THEME.RGB.RGB.THEME.UNSUPPORTED.RGB.RGB.toString(), "RGB", "just some Apps Script weirdness")
-
+   
+    // check the safe version 
+    p = newFakeGasenumSafe(fruit)
+    t.deepEqual(getSeed(p), fruit)
+    t.is(t.threw(() => p.foo)?.message, "attempt to get non-existent property foo in fake-gas-enum", "check proxies are guarding")
+    testEnumProp(p, "safe version")
+    
+    // versus the unsafe version
+    t.true(is.undefined(ColorType.foo))
   })
 }
 

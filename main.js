@@ -1,1 +1,1 @@
-export { newFakeGasenum } from "./src/gasenum.js"
+export { newFakeGasenum, newFakeGasenumSafe } from "./src/gasenum.js"

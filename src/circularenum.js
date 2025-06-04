@@ -12,7 +12,8 @@ class CircularEnum {
   }
 }
 
-export const newCircularEnum = (keys, defaultKey) => {
-  return guard(new CircularEnum(keys, defaultKey))
+export const newCircularEnum = (safe, keys, defaultKey) => {
+  const c = new CircularEnum(keys, defaultKey)
+  return safe ? guard(c) : c
 }
 
