@@ -138,7 +138,31 @@ You can of course still use Reflect to see if an Enum has a particular key defin
 Reflect.has (p, "foo") // false
 ````
 
+
 I recommend using this safe variant. A circumstance where you might prefer to go with the looser unsafe version is if your code (or modules you import) probe for values rather than check for presence of keys.
+
+## Custom Values
+
+You can also assign custom values to enum keys by passing an object instead of an array. This is useful when the `toString()` value of an enum should be different from its key name.
+
+````js
+const MyEnum = newFakeGasenum({
+  KEY1: "Value 1",
+  KEY2: "Value 2"
+});
+
+t.is(MyEnum.KEY1.name(), "KEY1");
+t.is(MyEnum.KEY1.toString(), "Value 1");
+t.is(MyEnum.KEY1.toJSON(), "Value 1");
+````
+
+If you pass values as numbers, they will be stringified for `toString()` but preserved as numbers for `toJSON()`.
+
+````js
+const NumericEnum = newFakeGasenum({ ONE: 1, TWO: 2 });
+t.is(NumericEnum.ONE.toString(), "1");
+t.is(NumericEnum.ONE.toJSON(), 1);
+````
 
 
 ## Conclusion

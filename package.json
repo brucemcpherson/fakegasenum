@@ -5,7 +5,7 @@
     "pub": "npm publish --access public"
   },
   "name": "@mcpher/fake-gasenum",
-  "version": "1.0.2",
+  "version": "1.0.6",
   "main": "main.js",
   "description": "A interpretation of Apps Script Enums on Node",
   "repository": "github:brucemcpherson/fakegasenum",
